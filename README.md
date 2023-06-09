@@ -1,5 +1,5 @@
 # War Card Game
-This is a simple implementation of the classic "War" card game using Object-Oriented Programming (OOP) principles in Python. The game is played with a standard deck of 52 playing cards, and can be played by two players.
+This is a simple implementation of the classic "War" card game using Object-Oriented Programming `(OOP)` principles in Python. The game is played with a standard deck of 52 playing cards, and can be played by two players.
 
 # Rules of the Game
 The rules of the "War" card game are simple:
