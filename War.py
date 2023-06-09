@@ -13,7 +13,20 @@ class card:
         return f'{self.rank} of {self.suite}'
 
 class Deck:
-    pass
+    def __init__(self):
+        print("Created New Orderd Deck")
+        self.cards=[card(rank,suite) for suite in SUITES for rank in RANKS]
+    
+    def shuffle_cards(self):
+        print("Shuffling Deck")
+        shuffle(self.cards)
+        shuffle(self.cards)
+
+    # Crating two card sets out of cards 
+    def split_in_half(self):  
+        return (self.cards[:len(self.cards)//2],self.cards[len(self.cards)//2:])
+    
+    
 
 class Hand:
     pass
