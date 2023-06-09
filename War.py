@@ -44,7 +44,30 @@ class Hand:
 
 
 class Player:
-    pass
+    def __init__(self, name, p_hand):
+        self.name = name
+        self.p_hand = p_hand
+    
+    # Play a card (remove played card from hand)
+    def play_card(self):
+        played_card = self.p_hand.remove_card()
+        print(f'{self.name} played {played_card}\n')
+        return played_card
+    
+    # Remove war cards 
+    def War(self):
+        war_cards = []
+        if len(self.p_hand.hand) < 3:
+            for i in range(len(self.p_hand.hand)):
+                war_cards.append(self.p_hand.remove_card())   
+        else:
+            for i in range(3):
+                war_cards.append(self.p_hand.remove_card())
+        return war_cards 
+    
+    # Check if player still has cards 
+    def still_have_cards(self):
+        return len(self.p_hand.hand) != 0
 
 
 class game:
