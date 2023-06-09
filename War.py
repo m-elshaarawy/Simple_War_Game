@@ -27,9 +27,21 @@ class Deck:
         return (self.cards[:len(self.cards)//2],self.cards[len(self.cards)//2:])
     
     
-
 class Hand:
-    pass
+    def __init__(self,hand):
+        self.hand=hand
+
+    def __str__(self):
+        return f'Contains {len(self.hand)} Cards'     
+    
+    # Add cards to hand   
+    def add(self, added_cards):
+        self.hand.extend(added_cards)
+    
+    # Remove a card from hand 
+    def remove_card(self):
+        return self.hand.pop(0)
+
 
 class Player:
     pass
