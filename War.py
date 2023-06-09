@@ -20,7 +20,6 @@ class Deck:
     def shuffle_cards(self):
         print("Shuffling Deck")
         shuffle(self.cards)
-        shuffle(self.cards)
 
     # Crating two card sets out of cards 
     def split_in_half(self):  
@@ -90,6 +89,7 @@ class Game:
         while self.player1.still_have_cards() and self.player2.still_have_cards():
             self.total_rounds+=1
             table_cards=[]
+            flag=0
             p1_card=self.player1.play_card()
             p2_card=self.player2.play_card()
             table_cards.append(p1_card)
@@ -100,6 +100,29 @@ class Game:
                 print("War! ...")
                 table_cards.extend(self.player1.War())
                 table_cards.extend(self.player2.War())
+                while (p1_card.rank == p2_card.rank):
+                    if self.player1.still_have_cards() and self.player2.still_have_cards():
+                        p1_card=self.player1.play_card()
+                        p2_card=self.player2.play_card()
+                        table_cards.append(p1_card)
+                        table_cards.append(p2_card)
+                    elif self.player1.still_have_cards():
+                        print("  ~   Game Over   ~  ")
+                        print(f'{self.player1.name} wins the game!')
+                        print("Number of rounds: " + str(self.total_rounds)) 
+                        print("Number of wars: " + str(self.war_count))
+                        flag=1
+                        break
+                    else:
+                        print("  ~   Game Over   ~  ")
+                        print(f'{self.player2.name} wins the game!')
+                        print("Number of rounds: " + str(self.total_rounds)) 
+                        print("Number of wars: " + str(self.war_count))
+                        flag=1
+                        break
+                if flag==1:
+                    break
+
 
                 if RANKS.index(p1_card.rank) < RANKS.index(p2_card.rank):
                     self.player2.p_hand.add(table_cards)
