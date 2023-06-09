@@ -82,7 +82,6 @@ class Game:
         self.c_sets=self.deck.split_in_half()
         self.player1=Player(name=input("Enter player_1's name :"),p_hand=Hand(self.c_sets[0]))
         self.player2=Player(name=input("Enter player_2's name :"),p_hand=Hand(self.c_sets[1]))
-        self.table_cards=[]
         self.total_rounds=0
         self.war_count=0
         
@@ -90,49 +89,51 @@ class Game:
         print("Game Started ^_^ ...")
         while self.player1.still_have_cards() and self.player2.still_have_cards():
             self.total_rounds+=1
-
+            table_cards=[]
             p1_card=self.player1.play_card()
             p2_card=self.player2.play_card()
-            self.table_cards.append(p1_card)
-            self.table_cards.append(p2_card)
+            table_cards.append(p1_card)
+            table_cards.append(p2_card)
 
             if p1_card.rank == p2_card.rank:
                 self.war_count+=1
                 print("War! ...")
-                self.table_cards.extend(self.player1.War())
-                self.table_cards.extend(self.player1.War())
+                table_cards.extend(self.player1.War())
+                table_cards.extend(self.player2.War())
 
                 if RANKS.index(p1_card.rank) < RANKS.index(p2_card.rank):
-                    self.player2.p_hand.add(self.table_cards)
+                    self.player2.p_hand.add(table_cards)
                 else:
-                    self.player1.p_hand.add(self.table_cards)
+                    self.player1.p_hand.add(table_cards)
             else:
 
                 if RANKS.index(p1_card.rank) < RANKS.index(p2_card.rank):
-                    self.player2.p_hand.add(self.table_cards)
+                    self.player2.p_hand.add(table_cards)
                 else:
-                    self.player1.p_hand.add(self.table_cards)
+                    self.player1.p_hand.add(table_cards)
 
             # check for winner
             if self.player1.still_have_cards() and self.player2.still_have_cards():
                 print("Time for new round!")
                 print("here are the current standings")
                 print(self.player1.name+" has : "+str(len(self.player1.p_hand.hand))+" Cards")
-                print(self.player1.name+" has : "+str(len(self.player1.p_hand.hand))+" Cards")
-            elif self.player1.still_have_cards() == False:
+                print(self.player2.name+" has : "+str(len(self.player2.p_hand.hand))+" Cards \n")
+            elif self.player1.still_have_cards():
                 print("  ~   Game Over   ~  ")
                 print(f'{self.player1.name} wins the game!')
                 print("Number of rounds: " + str(self.total_rounds)) 
                 print("Number of wars: " + str(self.war_count))
             else:
                 print("  ~   Game Over   ~  ")
-                print(f'{self.player1.name} wins the game!')
+                print(f'{self.player2.name} wins the game!')
                 print("Number of rounds: " + str(self.total_rounds)) 
                 print("Number of wars: " + str(self.war_count))
 
 # Game Excute        
 
+game=Game()
 
+game.play_game()
 
 
 
